@@ -1,0 +1,93 @@
+> Task :core:core-enum:compileJava UP-TO-DATE
+> Task :storage:db-core:compileJava UP-TO-DATE
+> Task :core:core-api:compileJava UP-TO-DATE
+> Task :core:core-api:processResources UP-TO-DATE
+> Task :core:core-api:classes UP-TO-DATE
+> Task :core:core-api:resolveMainClassName UP-TO-DATE
+> Task :core:core-enum:processResources NO-SOURCE
+> Task :core:core-enum:classes UP-TO-DATE
+> Task :core:core-enum:jar UP-TO-DATE
+> Task :storage:db-core:processResources UP-TO-DATE
+> Task :storage:db-core:classes UP-TO-DATE
+> Task :storage:db-core:jar UP-TO-DATE
+
+> Task :core:core-api:bootRun FAILED
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2025-04-09T18:46:53.667+09:00  INFO 45891 --- [core-api] [           main] c.c.springboot.CoreApiApplication        : Starting CoreApiApplication using Java 21.0.3 with PID 45891 (/Users/yowon/study/spring-batch-exam/core/core-api/build/classes/java/main started by yowon in /Users/yowon/study/spring-batch-exam/core/core-api)
+2025-04-09T18:46:53.668+09:00  INFO 45891 --- [core-api] [           main] c.c.springboot.CoreApiApplication        : The following 1 profile is active: "local-dev"
+2025-04-09T18:46:53.693+09:00  INFO 45891 --- [core-api] [           main] .s.b.d.c.l.DockerComposeLifecycleManager : Using Docker Compose file /Users/yowon/study/spring-batch-exam/docker-compose.yml
+2025-04-09T18:46:53.761+09:00 ERROR 45891 --- [core-api] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.boot.docker.compose.core.DockerNotRunningException: Docker is not running
+	at org.springframework.boot.docker.compose.core.DockerCli$DockerCommands.getDockerCommand(DockerCli.java:157) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.core.DockerCli$DockerCommands.<init>(DockerCli.java:140) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.core.DockerCli.lambda$new$0(DockerCli.java:66) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228) ~[na:na]
+	at org.springframework.boot.docker.compose.core.DockerCli.<init>(DockerCli.java:65) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.core.DockerCompose.get(DockerCompose.java:145) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeLifecycleManager.getDockerCompose(DockerComposeLifecycleManager.java:166) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeLifecycleManager.start(DockerComposeLifecycleManager.java:114) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeListener.onApplicationEvent(DockerComposeListener.java:53) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeListener.onApplicationEvent(DockerComposeListener.java:35) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:138) ~[spring-context-6.2.5.jar:6.2.5]
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.context.event.EventPublishingRunListener.contextLoaded(EventPublishingRunListener.java:98) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$contextLoaded$4(SpringApplicationRunListeners.java:72) ~[spring-boot-3.4.4.jar:3.4.4]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplicationRunListeners.contextLoaded(SpringApplicationRunListeners.java:72) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:416) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:317) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.4.4.jar:3.4.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.4.4.jar:3.4.4]
+	at com.capybara.springboot.CoreApiApplication.main(CoreApiApplication.java:12) ~[main/:na]
+Caused by: org.springframework.boot.docker.compose.core.ProcessExitException: 'docker version --format {{.Client.Version}}' failed with exit code 1.
+
+Stdout:
+20.10.14
+
+
+Stderr:
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+	at org.springframework.boot.docker.compose.core.ProcessRunner.run(ProcessRunner.java:97) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.core.ProcessRunner.run(ProcessRunner.java:75) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	at org.springframework.boot.docker.compose.core.DockerCli$DockerCommands.getDockerCommand(DockerCli.java:146) ~[spring-boot-docker-compose-3.4.4.jar:3.4.4]
+	... 25 common frames omitted
+
+
+[Incubating] Problems report is available at: file:///Users/yowon/study/spring-batch-exam/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:core-api:bootRun'.
+> Process 'command '/Users/yowon/Library/Java/JavaVirtualMachines/azul-21.0.3/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.13/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1s
+9 actionable tasks: 1 executed, 8 up-to-date

@@ -1,1 +1,17 @@
+
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+    }
+}
+
 rootProject.name = 'spring-batch-exam'
+
+
+include 'core:core-enum'
+include 'core:core-api'
+include 'storage:db-core'
+include 'tests:api-docs'
