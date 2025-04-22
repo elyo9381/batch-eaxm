@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.capybara.springboot.storage.db.CoreDbContextTest;
 
+import com.capybara.springboot.storage.db.core.exam.ExampleEntity;
+import com.capybara.springboot.storage.db.core.exam.ExampleRepository;
 import org.junit.jupiter.api.Test;
 
 public class ExampleRepositoryIT extends CoreDbContextTest {
@@ -22,5 +24,4 @@ public class ExampleRepositoryIT extends CoreDbContextTest {
         ExampleEntity found = exampleRepository.findById(saved.getId()).get();
         assertThat(found.getExampleColumn()).isEqualTo("SPRING_BOOT");
     }
-
 }

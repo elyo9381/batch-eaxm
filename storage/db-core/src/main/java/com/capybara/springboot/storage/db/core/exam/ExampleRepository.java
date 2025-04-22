@@ -1,4 +1,4 @@
-package com.capybara.springboot.storage.db.core;
+package com.capybara.springboot.storage.db.core.exam;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
