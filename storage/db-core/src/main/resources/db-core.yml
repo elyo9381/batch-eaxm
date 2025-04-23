@@ -10,6 +10,11 @@ spring:
 spring.config.activate.on-profile: local
 
 spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false  # 애플리케이션 시작 시 모든 배치 작업 자동 실행 방지
   jpa:
     hibernate:
       ddl-auto: create

@@ -17,8 +17,8 @@ class CoreDataSourceConfig {
         return new HikariConfig();
     }
 
-    @Bean
-    public HikariDataSource coreDataSource(@Qualifier("coreHikariConfig") HikariConfig config) {
+    @Bean(name = "dataSource") // Explicitly name the bean 'dataSource'
+    public HikariDataSource dataSource(@Qualifier("coreHikariConfig") HikariConfig config) { // Rename method as well
         return new HikariDataSource(config);
     }
 

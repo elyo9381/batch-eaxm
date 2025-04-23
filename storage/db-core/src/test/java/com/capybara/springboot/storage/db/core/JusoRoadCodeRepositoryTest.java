@@ -202,24 +202,4 @@ public class JusoRoadCodeRepositoryTest extends CoreDbContextTest {
             }
         }
     }
-
-    @Test
-    public void testLoadFromAbsolutePath() throws Exception {
-        // 절대 경로로 파일에 접근
-        File file = new File("/Users/refine/DEV/study/batch-eaxm/storage/db-core/src/test/resources/개선_도로명코드_전체분.txt");
-        if (!file.exists()) {
-            System.out.println("파일이 존재하지 않습니다: " + file.getAbsolutePath());
-            return;
-        }
-
-        List<JusoRoadCode> roadCodes = new ArrayList<>();
-        // EUC-KR 인코딩으로 시도 (한국어 파일에서 가장 흔한 인코딩)
-        readAndParseFile(file, "MS949", roadCodes);
-
-        if (!roadCodes.isEmpty()) {
-            jusoRoadCodeRepository.saveAll(roadCodes);
-            System.out.println(roadCodes.size() + "개의 도로명코드를 저장했습니다.");
-        }
-    }
-
 }
