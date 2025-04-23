@@ -27,6 +27,8 @@ import javax.sql.DataSource;
 @Configuration
 public class BatchConfig {
 
+    private static final String INPUT_FILE_PATH = "개선_도로명코드_전체분.txt"; // 입력 파일 경로 상수화
+
     @Autowired
     private JobRepository jobRepository;
 
@@ -55,10 +57,12 @@ public class BatchConfig {
         return new JdbcBatchWriter();
     }
 
+    // --- 파티셔닝 관련 Bean 정의는 제거됨 ---
+
     @Bean
     public Job importJusoRoadCodeJob() throws Exception {
         return new JobBuilder("importJusoRoadCodeJob", jobRepository)
-                .start(step1())
+                .start(step1()) // 원래 Step 실행
                 .build();
     }
 
@@ -82,22 +86,23 @@ public class BatchConfig {
         // 예: 4 ~ 16 사이에서 테스트 시작
         executor.setCorePoolSize(8);
         executor.setMaxPoolSize(16);
-        executor.setQueueCapacity(100); // 큐 크기도 적절히 조절
+        executor.setQueueCapacity(100);
         executor.setThreadNamePrefix("batch-");
-        executor.initialize(); // initialize() 호출 필요
+        executor.initialize();
         return executor;
     }
 
+    // --- 파티셔닝 관련 Step 정의는 제거됨 ---
 
-
+    // --- 원래의 Multi-threaded Step ---
     @Bean
     public Step step1() throws Exception {
         return new StepBuilder("step1", jobRepository)
-                .<String[], JusoRoadCode>chunk(10000, transactionManager) // 청크 크기 증가
-                .reader(flatFileItemReader())
-                .processor(jusoRoadCodeItemProcessor())
-                .writer(jdbcBatchWriter())
-                .taskExecutor(taskExecutor()) // 멀티스레드 처리 추가
+                .<String[], JusoRoadCode>chunk(5000, transactionManager) // 청크 크기 유지
+                .reader(flatFileItemReader()) // StepScope 없는 Reader 사용
+                .processor(jusoRoadCodeItemProcessor()) // Processor는 그대로 사용
+                .writer(jdbcBatchItemWriter()) // StepScope 없는 Writer 사용
+                .taskExecutor(taskExecutor()) // 멀티스레드 처리 적용
                 .build();
     }
 
@@ -124,22 +129,28 @@ public class BatchConfig {
                 .build();
     }
 
-
     @Bean
     public FlatFileItemReader<String[]> flatFileItemReader() {
-        // 버퍼 크기 조절을 위한 커스텀 팩토리 (이전 답변 참고)
+        // 버퍼 크기 조절을 위한 커스텀 팩토리
         CustomBufferSizeBufferedReaderFactory bufferedReaderFactory =
-                new CustomBufferSizeBufferedReaderFactory(161920); // 80KB
+                new CustomBufferSizeBufferedReaderFactory(161920); // 158KB
 
         return new FlatFileItemReaderBuilder<String[]>()
                 .name("jusoRoadCodeFileReader")
-                .resource(new ClassPathResource("개선_도로명코드_전체분.txt"))
+                .resource(new ClassPathResource(INPUT_FILE_PATH))
                 .encoding("MS949") // 파일 인코딩 정확히 지정
                 .linesToSkip(0) // 헤더 없음
                 .bufferedReaderFactory(bufferedReaderFactory) // 버퍼 크기 설정
-                .saveState(false) // 멀티스레드 환경 필수
+                .saveState(false) // 멀티스레드 환경 필수 (파티셔닝 아니어도 필요)
+                .strict(true) // 파일이 없거나 읽을 수 없을 때 예외 발생
                 .lineMapper((line, lineNumber) -> line.split("\\|", -1)) // 직접 LineMapper 구현
                 .build();
     }
 
+    // Processor는 상태가 없으면 StepScope가 필요 없을 수 있음
+    // @Bean
+    // @StepScope
+    // public JusoRoadCodeItemProcessor jusoRoadCodeItemProcessor() {
+    //     return new JusoRoadCodeItemProcessor();
+    // }
 }

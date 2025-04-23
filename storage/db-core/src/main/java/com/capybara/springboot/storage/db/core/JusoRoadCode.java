@@ -207,4 +207,28 @@ public class JusoRoadCode extends BaseEntity {
     public void setDeletionDate(String deletionDate) {
         this.deletionDate = deletionDate;
     }
+
+    @Override
+    public String toString() {
+        return "JusoRoadCode{" +
+                "jusoRoadCodeId=" + jusoRoadCodeId +
+                ", roadNameCode='" + roadNameCode + '\'' +
+                ", roadName='" + roadName + '\'' +
+                ", roadNameRoman='" + roadNameRoman + '\'' +
+                ", emdongSerialNo='" + emdongSerialNo + '\'' +
+                ", sido='" + sido + '\'' +
+                ", sidoRoman='" + sidoRoman + '\'' +
+                ", sigungu='" + sigungu + '\'' +
+                ", sigunguRoman='" + sigunguRoman + '\'' +
+                ", emdongName='" + emdongName + '\'' +
+                ", emdongRoman='" + emdongRoman + '\'' +
+                ", emdongType='" + emdongType + '\'' +
+                ", emdongCode='" + emdongCode + '\'' +
+                ", isUsed='" + isUsed + '\'' +
+                ", changeReason='" + changeReason + '\'' +
+                ", changeHistoryInfo='" + changeHistoryInfo + '\'' +
+                ", announcementDate='" + announcementDate + '\'' +
+                ", deletionDate='" + deletionDate + '\'' +
+                '}';
+    }
 }

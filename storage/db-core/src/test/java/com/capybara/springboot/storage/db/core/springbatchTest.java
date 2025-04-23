@@ -5,6 +5,8 @@ import com.capybara.springboot.storage.db.core.batch.JusoRoadCodeBatchJobRunner;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 
 public class springbatchTest extends CoreDbContextTest {
 
@@ -21,6 +23,10 @@ public class springbatchTest extends CoreDbContextTest {
 
         // 배치 작업 실행
         batchJobRunner.runBatchJob();
+
+//        List<JusoRoadCode> all = jusoRoadCodeRepository.findAll();
+
+//        all.forEach(System.out::println);
 
         // 결과 확인
         long count = jusoRoadCodeRepository.count();
