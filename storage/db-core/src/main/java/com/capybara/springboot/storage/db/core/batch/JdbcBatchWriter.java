@@ -33,14 +33,14 @@ public class JdbcBatchWriter implements ItemWriter<JusoRoadCode> {
         if (items.isEmpty()) {
             return;
         }
-        
+
         long chunkStartTime = System.currentTimeMillis();
         String threadName = Thread.currentThread().getName();
 
         try (Connection conn = dataSource.getConnection()) {
             // 성능 최적화를 위한 연결 속성 설정
             conn.setAutoCommit(false);
-            
+
             // DB별 최적화 설정은 생략
             // H2 데이터베이스 사용중이므로 특별한 설정 필요 없음
             logger.debug("DB 연결: {}", conn.getMetaData().getDatabaseProductName());
@@ -49,7 +49,7 @@ public class JdbcBatchWriter implements ItemWriter<JusoRoadCode> {
             for (int batchStart = 0; batchStart < items.size(); batchStart += MAX_BATCH_SIZE) {
                 int batchEnd = Math.min(batchStart + MAX_BATCH_SIZE, items.size());
                 List<? extends JusoRoadCode> batchItems = items.subList(batchStart, batchEnd);
-                
+
                 StringBuilder sql = new StringBuilder();
                 sql.append("INSERT INTO juso_road_code (juso_road_code_id, road_name_code, road_name, road_name_roman, emdong_serial_no, " +
                         "sido, sido_roman, sigungu, sigungu_roman, emdong_name, emdong_roman, emdong_type, " +
@@ -92,16 +92,16 @@ public class JdbcBatchWriter implements ItemWriter<JusoRoadCode> {
             }
 
             conn.commit();
-            
+
             // 성능 통계 로깅
             int currentCount = totalCount.addAndGet(items.size());
             long chunkEndTime = System.currentTimeMillis();
             long chunkElapsedTime = chunkEndTime - chunkStartTime;
             long totalElapsedTime = chunkEndTime - startTime;
-            
-            logger.info("[{}] 청크 처리 완료: {}건, 소요시간: {}ms, 초당 처리량: {}/s, 누적: {}, 총 소요시간: {}s", 
+
+            logger.info("[{}] 청크 처리 완료: {}건, 소요시간: {}ms, 초당 처리량: {}/s, 누적: {}, 총 소요시간: {}s",
                     threadName,
-                    items.size(), 
+                    items.size(),
                     chunkElapsedTime,
                     chunkElapsedTime > 0 ? (items.size() * 1000 / chunkElapsedTime) : 0,
                     currentCount,

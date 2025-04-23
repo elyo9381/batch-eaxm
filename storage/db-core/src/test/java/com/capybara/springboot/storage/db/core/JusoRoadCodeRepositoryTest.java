@@ -85,7 +85,7 @@ public class JusoRoadCodeRepositoryTest extends CoreDbContextTest {
 
 
             int total = roadCodes.size();
-            final int BATCH_SIZE = 1000; // 배치 크기 증가
+            final int BATCH_SIZE = 5000; // 배치 크기 증가
 
             // JDBC batch insert 사용
             jdbcBatchInsert(roadCodes, BATCH_SIZE);
